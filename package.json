@@ -12,11 +12,17 @@
     "dev": "npm run web",
     "test": "playwright test",
     "test:visual": "playwright test tests/visual-check.spec.ts --project=chromium",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report",
     "db:push": "cd packages/db && npm run db:push",
     "db:studio": "cd packages/db && npm run db:studio"
   },
   "devDependencies": {
+    "@argos-ci/playwright": "^5.0.4",
     "@playwright/test": "^1.48.0",
+    "playwright": "^1.53.1",
     "typescript": "^5.6.0"
   }
 }

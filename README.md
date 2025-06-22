@@ -8,6 +8,7 @@ A modern, full-stack monorepo combining the T3 Stack with Solito v4 for unified 
 - **T3 Stack** - TypeScript, tRPC, Prisma
 - **Supabase** - PostgreSQL database & authentication
 - **Playwright** - E2E testing with visual regression
+- **Argos CI** - Visual regression testing
 - **Tailwind CSS** - Utility-first CSS (web)
 - **React Native** - Native mobile development
 
@@ -58,6 +59,7 @@ dream-app/
 - `npm run native` - Start Expo development server
 - `npm test` - Run Playwright tests
 - `npm run test:visual` - Run visual regression tests
+- `npm run test:ui` - Interactive test UI
 - `npm run db:studio` - Open Prisma Studio
 - `npm run db:push` - Push schema changes to database
 
@@ -72,9 +74,18 @@ npm test
 # Run visual checks
 npm run test:visual
 
+# Interactive UI mode
+npm run test:ui
+
 # View test report
-npx playwright show-report
+npm run test:report
 ```
+
+### Visual Regression with Argos CI
+
+This project is configured for visual regression testing with Argos CI:
+- Account: mthomas100
+- Dashboard: https://app.argos-ci.com/mthomas100/dream-app
 
 ## Database Schema
 
@@ -110,7 +121,11 @@ npm install [package-name]
 2. **Solito v4** - Provides unified navigation with App Router support
 3. **tRPC** - Type-safe API layer shared between platforms
 4. **Prisma + Supabase** - Type-safe database with real-time capabilities
-5. **Playwright** - Cross-browser testing with visual regression
+5. **Playwright + Argos** - Cross-browser testing with visual regression
+
+## Repository
+
+https://github.com/collective-dreams/dream-app
 
 ## Next Steps
 

@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test'
+import { argosScreenshot } from '@argos-ci/playwright'
 
 export default defineConfig({
   testDir: './tests',
@@ -6,11 +7,16 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
+  reporter: [
+    ['html'],
+    ['list'],
+    ['@argos-ci/playwright/reporter', { uploadToArgos: true }]
+  ],
   use: {
     baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
   },
 
   projects: [
@@ -30,6 +36,10 @@ export default defineConfig({
       name: 'Mobile Chrome',
       use: { ...devices['Pixel 5'] },
     },
+    {
+      name: 'Mobile Safari',
+      use: { ...devices['iPhone 12'] },
+    },
   ],
 
   webServer: {
@@ -38,3 +48,6 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
   },
 })
+
+// Add Argos screenshot command
+export { argosScreenshot }

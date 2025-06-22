@@ -2,13 +2,13 @@ import { initTRPC, TRPCError } from '@trpc/server'
 import { type CreateNextContextOptions } from '@trpc/server/adapters/next'
 import superjson from 'superjson'
 import { ZodError } from 'zod'
-import { db } from '@dream-app/db'
+// import { db } from '@dream-app/db'
 
 export const createTRPCContext = async (opts: CreateNextContextOptions) => {
   const { req, res } = opts
 
   return {
-    db,
+    // db, // TODO: Re-enable when database is set up
     req,
     res,
   }

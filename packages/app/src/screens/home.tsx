@@ -1,11 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { useLink } from 'solito/link'
+import { Link } from 'solito/link'
 
 export function HomeScreen() {
-  const linkProps = useLink({
-    href: '/about',
-  })
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Hello from T3 + Solito v4! 🚀</Text>
@@ -13,9 +9,11 @@ export function HomeScreen() {
         This is a unified React Native + Next.js app
       </Text>
       
-      <TouchableOpacity style={styles.button} {...linkProps}>
-        <Text style={styles.buttonText}>Go to About</Text>
-      </TouchableOpacity>
+      <Link href="/about">
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Go to About</Text>
+        </TouchableOpacity>
+      </Link>
 
       <View style={styles.features}>
         <Text style={styles.featureTitle}>Tech Stack:</Text>

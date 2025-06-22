@@ -1,9 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { useRouter } from 'solito/router'
+import { Link } from 'solito/link'
 
 export function AboutScreen() {
-  const router = useRouter()
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>About Dream App</Text>
@@ -12,12 +10,11 @@ export function AboutScreen() {
         cross-platform development.
       </Text>
       
-      <TouchableOpacity 
-        style={styles.button}
-        onPress={() => router.back()}
-      >
-        <Text style={styles.buttonText}>Go Back</Text>
-      </TouchableOpacity>
+      <Link href="/">
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Go Back</Text>
+        </TouchableOpacity>
+      </Link>
     </View>
   )
 }

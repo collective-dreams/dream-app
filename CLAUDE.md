@@ -295,3 +295,20 @@ npm run db:generate
 - tRPC with Next.js App Router needs careful configuration
 - Visual testing remains crucial for cross-platform UI consistency
 - Frequent commits provide valuable development history
+
+## Debugging Guidelines
+
+### When Stuck on Technical Issues
+**IMPORTANT**: When spending more than 10-15 minutes debugging a technical issue without progress, ALWAYS resort to online research using the WebSearch tool. Don't waste time trying the same approaches repeatedly.
+
+Examples of when to search:
+- Framework integration issues (e.g., "tRPC Next.js 13 app router unable to transform response")
+- Version compatibility problems
+- Cryptic error messages
+- Configuration issues that aren't documented locally
+
+Search strategy:
+1. Include specific error messages in quotes
+2. Add version numbers for frameworks
+3. Search for GitHub issues with similar problems
+4. Look for recent blog posts or documentation updates

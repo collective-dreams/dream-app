@@ -1,5 +1,4 @@
 import { defineConfig, devices } from '@playwright/test'
-import { argosScreenshot } from '@argos-ci/playwright'
 
 export default defineConfig({
   testDir: './tests',
@@ -9,8 +8,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: [
     ['html'],
-    ['list'],
-    ['@argos-ci/playwright/reporter', { uploadToArgos: true }]
+    ['list']
   ],
   use: {
     baseURL: 'http://localhost:3000',
@@ -48,6 +46,3 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
   },
 })
-
-// Add Argos screenshot command
-export { argosScreenshot }

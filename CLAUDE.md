@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Dream App - T3 + Solito v4 + Supabase Stack
 
 ## Project Transformation (Session Date: June 22, 2025)
@@ -9,7 +8,6 @@ Transforming from visual testing demo to full-stack T3 + Solito v4 app with Supa
 - **T3 Stack**: TypeScript, tRPC, Prisma
 - **Supabase**: Database & Auth
 - **Playwright**: Visual testing (preserved from previous setup)
-- **Argos CI**: Visual regression testing
 
 ## Project Structure
 ```
@@ -24,44 +22,106 @@ dream-app/
 └── screenshots/        # Visual test outputs
 ```
 
+## Git Commit Instructions
+
+### IMPORTANT: Commit Early and Often! 🚀
+**Repository**: https://github.com/collective-dreams/dream-app
+
+**Commit after EVERY meaningful change** - we want a detailed record of all development steps.
+
+### Commit Frequency Guidelines
+1. **Commit after each file creation or deletion**
+2. **Commit after each successful feature implementation**
+3. **Commit after each bug fix attempt** (even if unsuccessful)
+4. **Commit before starting any major refactoring**
+5. **Commit after updating dependencies**
+6. **Commit after configuration changes**
+7. **Commit after writing tests**
+8. **Commit when switching between tasks**
+9. **Commit before taking a break**
+10. **Commit after debugging sessions**
+
+### Commit Workflow
+```bash
+# Review changes before committing
+git status
+git diff
+
+# Stage and commit with descriptive messages
+git add .
+git commit -m "feat: add dark mode toggle with smooth transitions"
+
+# Push frequently to maintain remote backup
+git push origin main
+```
+
+### Commit Message Format
+Use conventional commits for clear history:
+- `feat:` - New features (e.g., "feat: add responsive navigation menu")
+- `fix:` - Bug fixes (e.g., "fix: correct button alignment in dark mode")
+- `test:` - Test additions or updates (e.g., "test: add visual regression tests for homepage")
+- `style:` - CSS/styling changes (e.g., "style: update button colors to match brand")
+- `refactor:` - Code improvements (e.g., "refactor: simplify event handler logic")
+- `docs:` - Documentation updates (e.g., "docs: update setup instructions")
+- `chore:` - Maintenance tasks (e.g., "chore: update dependencies")
+- `wip:` - Work in progress (e.g., "wip: debugging tRPC connection issues")
+- `config:` - Configuration changes (e.g., "config: disable Argos CI integration")
+
+### Examples of Frequent Commits:
+```bash
+# Creating new files
+git add packages/app/src/screens/home.tsx
+git commit -m "feat: create shared home screen component"
+
+# Debugging attempts
+git add apps/next/src/app/api/trpc/[trpc]/route.ts
+git commit -m "wip: add superjson import to tRPC route handler"
+
+# Configuration changes
+git add playwright.config.ts
+git commit -m "config: remove Argos reporter from Playwright"
+
+# Failed attempts (still commit!)
+git add tests/debug-trpc.spec.ts
+git commit -m "test: add debug test for tRPC connection issues"
+
+# Documentation updates
+git add CLAUDE.md
+git commit -m "docs: add frequent commit guidelines"
+
+# Multiple related changes
+git add apps/next/src/utils/api.tsx apps/next/src/app/layout.tsx
+git commit -m "fix: wrap app with tRPC provider"
+```
+
+### Commit Checklist
+Before moving to the next task, ask yourself:
+- [ ] Have I committed my current changes?
+- [ ] Is my commit message descriptive?
+- [ ] Have I pushed to remote?
+- [ ] Does the commit represent one logical change?
+
+### Important Notes:
+- **Never batch multiple unrelated changes** in one commit
+- **Commit even failed attempts** - they provide valuable history
+- **Use WIP commits** when debugging or experimenting
+- **Push after every 2-3 commits** to maintain backup
+- Write messages in present tense ("add" not "added")
+- Include context when helpful (e.g., "fix: prevent form submission when fields are empty")
+
 ## Preserved Patterns from Previous Setup
 
 ### Visual Testing & Screenshot Workflow (KEEP THIS!)
 The visual testing workflow is extremely valuable for ensuring UI consistency across web and mobile.
 
-### Argos CI Integration (Visual Regression)
-- **Account**: mthomas100
-- **Project**: dream-app  
-- **Dashboard**: https://app.argos-ci.com/mthomas100/dream-app
-- **Token**: Set in `.env` file (argos_1fc3a4d7478b92b9c36b28b6f181f9d53e)
-
-#### Configuration Files:
-**.argos.json**
-```json
-{
-  "owner": "mthomas100",
-  "project": "dream-app",
-  "uploadToArgos": true
-}
-```
-
-**playwright.config.ts** (with Argos integration)
-```typescript
-use: {
-  baseURL: 'http://localhost:3000',
-  trace: 'on-first-retry',
-  screenshot: 'only-on-failure',
-},
-```
-
-#### Visual Verification Workflow
+### Visual Verification Workflow
 1. Make the requested change
 2. Capture a screenshot: `npm test -- tests/visual-check.spec.ts --project=chromium`
 3. Verify the screenshot using Read tool
 4. Analyze and respond with specific observations
 5. Iterate if needed
 
-#### Critical Visual Checks to Always Perform:
+### Critical Visual Checks to Always Perform:
 
 When implementing any UI changes, ALWAYS proactively test these states:
 
@@ -128,27 +188,25 @@ When implementing any UI changes, ALWAYS proactively test these states:
    - Describe what you see in detail - this helps identify issues systematically
    - Be specific about what "looks wrong" and why (e.g., "cards feel cramped" → "15px gap is too tight for cards this size")
 
-5. **Hot Reload Integration**
-   - Using live-server means changes appear instantly in the browser
-   - User can watch the improvements happen in real-time
-   - Creates a collaborative feel - "we're designing this together"
-
-### Testing Commands (Preserved)
+### Testing Commands
 ```bash
 # Visual testing with screenshots
 npm test -- tests/visual-check.spec.ts --project=chromium
 
-# Run tests with Argos upload
-export ARGOS_TOKEN=argos_1fc3a4d7478b92b9c36b28b6f181f9d53e && npm test
-
 # Run specific tests
-npm test -- tests/hello-world.spec.ts --project=chromium
+npm test -- tests/app.spec.ts --project=chromium
 
 # Open screenshots on Mac
 open screenshots/visual-check.png
+
+# Run all tests
+npm test
+
+# Debug test with console output
+npm test -- tests/debug-trpc.spec.ts --project=chromium
 ```
 
-### Screenshot Testing Files to Create
+### Screenshot Testing Files
 
 #### tests/visual-check.spec.ts (Quick Visual Verification)
 ```typescript
@@ -161,165 +219,38 @@ test('visual check', async ({ page }) => {
 })
 ```
 
-#### tests/hover-visual-check.spec.ts (Hover State Testing)
-```typescript
-import { test } from '@playwright/test'
-
-test('visual check of card hover states', async ({ page }) => {
-  await page.goto('/')
-  await page.waitForTimeout(1000)
-  
-  // Normal state
-  await page.screenshot({ path: 'screenshots/cards-normal.png', fullPage: false })
-  
-  // Hover on first card
-  await page.locator('.dream-card').first().hover()
-  await page.waitForTimeout(500)
-  await page.screenshot({ path: 'screenshots/cards-with-hover.png', fullPage: false })
-  
-  // Dark mode hover
-  await page.locator('#theme-toggle').click()
-  await page.waitForTimeout(300)
-  
-  await page.locator('.dream-card').first().hover()
-  await page.waitForTimeout(500)
-  await page.screenshot({ path: 'screenshots/cards-dark-hover.png', fullPage: false })
-})
-```
-
-#### tests/responsive-check.spec.ts (Responsive Testing)
-```typescript
-import { test } from '@playwright/test'
-
-test('responsive design check', async ({ page }) => {
-  const viewports = {
-    'mobile': { width: 375, height: 667 },
-    'tablet': { width: 768, height: 1024 },
-    'desktop': { width: 1440, height: 900 }
-  }
-  
-  for (const [name, viewport] of Object.entries(viewports)) {
-    await page.setViewportSize(viewport)
-    await page.goto('/')
-    await page.waitForTimeout(1000)
-    await page.screenshot({ 
-      path: `screenshots/${name}-view.png`, 
-      fullPage: true 
-    })
-  }
-})
-```
-
-### Design System Patterns (Worth Preserving)
-```css
-/* Gradient system */
---primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
---secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-
-/* Shadow system */
---shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
---shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
---shadow-large: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-
-/* Dark mode implementation */
-body.dark-mode {
-  /* CSS variables approach for theming */
-}
-```
-
-### Micro-interactions (Worth Preserving)
-- Ripple effects on click
-- Sparkle animations
-- Smooth transitions
-- Progress animations
-- Confetti for achievements
-
 ## New Stack Setup Process
 
 ### 1. Solito v4 Setup
 - ✅ Monorepo structure with apps/ and packages/
-- ✅ Unified navigation with useLink and useRouter
+- ✅ Unified navigation with Link component (not hooks)
 - ✅ React Native Web integration
 
 ### 2. T3 Stack Integration
 - ✅ tRPC for type-safe APIs
 - ✅ Prisma ORM configured
 - ✅ Next.js App Router support
+- 🔧 Debugging tRPC client-server connection
 
 ### 3. Supabase Integration
 - ✅ Prisma schema configured for PostgreSQL
 - ⏳ Supabase MCP for database management
+- ⏳ Real database credentials needed
 - ⏳ Auth with Supabase
 
 ### 4. Testing Setup
 - ✅ Playwright for E2E tests
 - ✅ Visual regression tests
-- ✅ Argos CI integration preserved
-
-## Git Commit Instructions (IMPORTANT - COMMIT FREQUENTLY!)
-
-**Repository**: https://github.com/collective-dreams/dream-app
-
-### ALWAYS Commit Changes After Making Them
-After making any significant changes to files, create descriptive commits immediately. Don't wait until the end of a session!
-
-### Commit Workflow
-```bash
-# Review changes before committing
-git status
-git diff
-
-# Stage and commit with descriptive messages
-git add .
-git commit -m "feat: add dark mode toggle with smooth transitions"
-
-# Push to GitHub
-git push origin main
-```
-
-### Commit Message Format
-- `feat:` - New features (e.g., "feat: add responsive navigation menu")
-- `fix:` - Bug fixes (e.g., "fix: correct button alignment in dark mode")
-- `test:` - Test additions or updates (e.g., "test: add visual regression tests for homepage")
-- `style:` - CSS/styling changes (e.g., "style: update button colors to match brand")
-- `refactor:` - Code improvements (e.g., "refactor: simplify event handler logic")
-- `docs:` - Documentation updates (e.g., "docs: update setup instructions")
-- `chore:` - Maintenance tasks (e.g., "chore: update dependencies")
-
-### Examples:
-```bash
-# After setting up project structure
-git add .
-git commit -m "feat: initialize T3 + Solito v4 monorepo structure"
-
-# After adding tRPC
-git add .
-git commit -m "feat: add tRPC with basic hello world procedures"
-
-# After creating test files
-git add tests/
-git commit -m "test: add visual regression test suite with hover and responsive checks"
-
-# After fixing issues
-git add .
-git commit -m "fix: resolve Next.js module resolution for shared packages"
-```
-
-### Important Git Rules:
-1. **Commit frequently** - After each logical unit of work
-2. **Keep commits focused** - One logical change per commit
-3. **Write clear messages** - Future you will thank you
-4. **Test before committing** - Ensure changes work properly
-5. **Push regularly** - Keep GitHub repo up to date
+- ✅ Argos CI integration removed for cleaner test output
 
 ## Development Workflow
 
 ### Local Development
 ```bash
 # Web development
-npm run dev
+npm run web         # or npm run dev
 
-# Mobile development (iOS)
+# Mobile development
 npm run native
 
 # Run tests
@@ -329,125 +260,38 @@ npm test
 npm run test:visual
 ```
 
-### Testing
+### Database Commands
 ```bash
-# Run all tests
-npm test
+# Push schema to database
+npm run db:push
 
-# Visual regression tests
-npm run test:visual
+# Open Prisma Studio
+npm run db:studio
 
-# Open test report
-npx playwright show-report
+# Generate Prisma client
+npm run db:generate
 ```
 
-## Important Notes
-- Always test on both web and mobile platforms
-- Use visual verification workflow for UI changes
-- Ensure tRPC procedures are type-safe
-- Keep Prisma schema in sync with Supabase
-- Test authentication flows thoroughly
+## Current Issues Being Fixed
+1. ✅ NextRouter was not mounted error - Fixed by using Link component
+2. 🔧 tRPC "Unable to transform response from server" - Debugging superjson config
+3. ⏳ Supabase connection needs real credentials
+4. ⏳ Mobile app (Expo) needs testing
 
-## Current Issues to Fix
-1. Next.js app not loading properly - need to debug module resolution
-2. tRPC integration needs testing
-3. Supabase connection needs real credentials
-4. Mobile app (Expo) needs testing
+## Important Configuration Changes Made
+1. **playwright.config.ts**: Removed Argos reporter for cleaner output
+2. **Solito navigation**: Changed from useLink/useRouter hooks to Link component
+3. **tRPC context**: Temporarily disabled database import
+4. **Dependencies**: Installed @argos-ci/playwright
 
-## Commands to Remember
-```bash
-# Database
-npm run db:push        # Push schema to database
-npm run db:studio      # Open Prisma Studio
+## Next Session Quick Start
+1. Navigate to project: `cd /Users/matthewthomas/repos/dream-app`
+2. Start dev server: `npm run web`
+3. Run tests: `npm test`
+4. Check visual output: `open screenshots/visual-check.png`
 
-# Development
-npm run dev           # Start Next.js
-npm run native        # Start Expo
-
-# Testing
-npm test              # Run all tests
-npm run test:visual   # Visual check only
-```
-=======
-# Dream App - Browser Testing Setup with Playwright MCP and Visual Regression
-
-## RESTART CONTEXT - EVERYTHING IS SET UP! 🎉
-
-### What We Built
-Successfully created a complete browser automation testing setup with visual regression capabilities:
-- **Playwright** for browser automation (clicking, typing, navigating)
-- **Argos CI** for visual regression (screenshot comparison)
-- **MCP Integration** for AI-powered test creation
-
-### Completed Setup ✅
-1. **Project Structure Created**:
-   ```
-   dream-app/
-   ├── tests/example-visual.spec.ts    # Example tests with screenshots
-   ├── playwright.config.ts            # Full Playwright + Argos config
-   ├── package.json                    # Scripts configured
-   ├── README.md                       # User documentation
-   ├── CLAUDE.md                       # This file
-   └── .gitignore                      # Proper ignores
-   ```
-
-2. **Dependencies Installed**:
-   - @playwright/test
-   - playwright  
-   - @argos-ci/playwright
-   - All Playwright browsers (Chromium, Firefox, WebKit)
-   - @upstash/context7-mcp (globally)
-
-3. **MCP Servers Configured** in `~/.claude_code/settings.json`:
-   ```json
-   {
-     "mcpServers": {
-       "context7": {
-         "command": "npx",
-         "args": ["@upstash/context7-mcp"]
-       },
-       "playwright": {
-         "command": "npx", 
-         "args": ["@playwright/mcp@latest"]
-       }
-     }
-   }
-   ```
-
-4. **Test Scripts Ready** in package.json:
-   ```bash
-   npm test          # Run all tests
-   npm run test:ui   # Interactive UI mode
-   npm run test:headed # See browser while testing
-   npm run test:debug  # Debug mode
-   npm run test:report # View HTML report
-   ```
-
-### How It Works
-- **Automated Testing**: Playwright clicks through pages, fills forms, navigates
-- **Visual Testing**: argosScreenshot() captures screenshots at key points
-- **Regression Detection**: Argos CI compares screenshots to detect UI changes
-- **MCP Integration**: Natural language commands for browser automation
-
-### Example Test Features (in tests/example-visual.spec.ts)
-- Full page screenshots
-- Element-specific screenshots  
-- Responsive design testing (desktop/tablet/mobile)
-- Interactive element testing
-- Form interaction with visual verification
-
-### User's Goal Achieved ✅
-User wanted: "clicking through doing [actions] but also the screenshot aspect"
-We delivered: Automated browser interactions + screenshot capture + visual regression
-
-### Next Steps After Restart
-1. Run `npm test` to see the tests in action
-2. Use MCP commands to create new tests via natural language
-3. Set up Argos CI account for cloud-based visual regression
-
-### Important Notes
-- MCP servers should be available after Claude Code restart
-- All dependencies are installed and ready
-- Tests work with real websites (example.com, playwright.dev)
-- Visual regression compares screenshots automatically
->>>>>>> 2407b51d83cb362756fdc4e93e892e1b273a8997
+## Key Learnings
+- Solito v4 with Next.js App Router requires Link component, not hooks
+- tRPC with Next.js App Router needs careful configuration
+- Visual testing remains crucial for cross-platform UI consistency
+- Frequent commits provide valuable development history

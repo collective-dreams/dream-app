@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream App - Hello World</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .greeting {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dream App</h1>
+    <div class="greeting" id="greeting">Hello World!</div>
+    
+    <div>
+        <button id="change-greeting">Change Greeting</button>
+        <button id="reset-greeting">Reset</button>
+        <button id="add-timestamp">Add Timestamp</button>
+    </div>
+    
+    <div id="output"></div>
+
+    <script>
+        const greeting = document.getElementById('greeting');
+        const output = document.getElementById('output');
+        let greetingIndex = 0;
+        const greetings = ['Hello World!', 'Bonjour le monde!', 'Hola mundo!', '你好世界!'];
+
+        document.getElementById('change-greeting').addEventListener('click', () => {
+            greetingIndex = (greetingIndex + 1) % greetings.length;
+            greeting.textContent = greetings[greetingIndex];
+            output.textContent = `Greeting changed to: ${greetings[greetingIndex]}`;
+        });
+
+        document.getElementById('reset-greeting').addEventListener('click', () => {
+            greetingIndex = 0;
+            greeting.textContent = greetings[0];
+            output.textContent = 'Greeting reset to default';
+        });
+
+        document.getElementById('add-timestamp').addEventListener('click', () => {
+            const timestamp = new Date().toLocaleTimeString();
+            output.textContent = `Current time: ${timestamp}`;
+        });
+    </script>
+</body>
+</html>

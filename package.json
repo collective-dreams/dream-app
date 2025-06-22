@@ -1,0 +1,22 @@
+{
+  "name": "dream-app",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "web": "cd apps/next && npm run dev",
+    "native": "cd apps/expo && npm run start",
+    "dev": "npm run web",
+    "test": "playwright test",
+    "test:visual": "playwright test tests/visual-check.spec.ts --project=chromium",
+    "db:push": "cd packages/db && npm run db:push",
+    "db:studio": "cd packages/db && npm run db:studio"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "typescript": "^5.6.0"
+  }
+}

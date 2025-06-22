@@ -16,6 +16,10 @@ export const appRouter = createTRPCRouter({
       timestamp: new Date().toISOString(),
     }
   }),
+  
+  simple: publicProcedure.query(() => {
+    return 'This is a simple string response'
+  }),
 })
 
 export type AppRouter = typeof appRouter

@@ -240,8 +240,8 @@ test('visual check', async ({ page }) => {
 
 ### 4. Testing Setup
 - ✅ Playwright for E2E tests
-- ✅ Visual regression tests
-- ✅ Argos CI integration removed for cleaner test output
+- ✅ Visual screenshot tests (without Argos CI)
+- ✅ Screenshot capabilities preserved for visual verification workflow
 
 ## Development Workflow
 
@@ -274,15 +274,19 @@ npm run db:generate
 
 ## Current Issues Being Fixed
 1. ✅ NextRouter was not mounted error - Fixed by using Link component
-2. 🔧 tRPC "Unable to transform response from server" - Debugging superjson config
+2. 🔧 tRPC client shows "Loading..." indefinitely
+   - API endpoints work when accessed directly (curl)
+   - Properly configured transformer in httpBatchLink
+   - Likely client-side hydration or React version compatibility issue
+   - Created debug tests: debug-trpc.spec.ts, trpc-wait-test.spec.ts, trpc-success-test.spec.ts
 3. ⏳ Supabase connection needs real credentials
 4. ⏳ Mobile app (Expo) needs testing
 
 ## Important Configuration Changes Made
-1. **playwright.config.ts**: Removed Argos reporter for cleaner output
+1. **playwright.config.ts**: Removed Argos CI integration for cleaner test output
 2. **Solito navigation**: Changed from useLink/useRouter hooks to Link component
 3. **tRPC context**: Temporarily disabled database import
-4. **Dependencies**: Installed @argos-ci/playwright
+4. **tRPC client**: Configured httpBatchLink with superjson transformer
 
 ## Next Session Quick Start
 1. Navigate to project: `cd /Users/matthewthomas/repos/dream-app`
